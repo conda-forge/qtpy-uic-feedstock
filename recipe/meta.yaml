@@ -10,7 +10,7 @@ source:
   sha256: eb6f48fef5825887a158521d7e72339b97caeddb5afa9035e26b028c59f831ab
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv --disable-pip-version-check
   noarch: python
   entry_points:
@@ -18,13 +18,15 @@ build:
 
 requirements:
   host:
-    - python >=3
+    - python {{ python_min }}
     - pip
     - setuptools
   run:
-    - python >=3
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - qtpyuic
   commands:
